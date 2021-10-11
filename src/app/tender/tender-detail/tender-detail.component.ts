@@ -95,7 +95,7 @@ export class TenderDetailComponent implements OnInit {
         this.form.value.creatorId
       );
 
-      this.router.navigate(['/']);
+      this.router.navigate(['/tender/list']);
     }
 
     this.form.reset();

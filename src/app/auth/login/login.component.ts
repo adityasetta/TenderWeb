@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(){
     const isAuth = this.authService.getIsAuth();
     if(isAuth){
-      this.router.navigate(['/']);
+      this.router.navigate(['/tender/list']);
     }
   }
 }
