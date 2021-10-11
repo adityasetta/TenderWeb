@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth-guard';
 import { LoginComponent } from './auth/login/login.component';
 import { TenderDetailComponent } from './tender/tender-detail/tender-detail.component';
 import { TenderListComponent } from './tender/tender-list/tender-list.component';
@@ -14,7 +13,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-  providers: [AuthGuard]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

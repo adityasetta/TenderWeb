@@ -9,8 +9,10 @@ import { AuthService } from "../auth.service";
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   isLoading = false;
+  private authStatusSub: Subscription
+
   constructor(public authService: AuthService, private router: Router){}
 
   onLogin(form: NgForm){
@@ -27,5 +29,15 @@ export class LoginComponent implements OnInit {
     if(isAuth){
       this.router.navigate(['/tender/list']);
     }
+
+    this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
+      authStatus => {
+        this.isLoading = false;
+      }
+    );
+  }
+
+  ngOnDestroy(){
+    this?.authStatusSub?.unsubscribe();
   }
 }

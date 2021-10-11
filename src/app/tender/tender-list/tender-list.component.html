@@ -4,7 +4,7 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Tenders</h1>
-		<a routerLink="/tender/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+		<a *ngIf="role === 'ADMIN'" routerLink="/tender/create" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
 				class="fas fa-plus fa-sm text-white-50"></i> Create Tender</a>
 	</div>
   <div class="card shadow mb-4">
@@ -33,8 +33,8 @@
                         <td>{{ tender.closingDate }}</td>
                         <td class="table-td-action">
                           <a [routerLink]="['/tender/view', tender.tenderId, 1]" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm btn-primary-outline"><i class="fas fa-search fa-sm text-white-50"></i></a>
-                          <a [routerLink]="['/tender/edit', tender.tenderId]" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm btn-primary-outline"><i class="fas fa-edit fa-sm text-yellow-50"></i></a>
-                          <button class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm btn-primary-outline" (click)="onDelete(tender.tenderId)"><i class="fas fa-trash-alt fa-sm text-white-50"></i></button>
+                          <a [routerLink]="['/tender/edit', tender.tenderId]" *ngIf="role === 'ADMIN'" class="d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm btn-primary-outline"><i class="fas fa-edit fa-sm text-yellow-50"></i></a>
+                          <button class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm btn-primary-outline" *ngIf="role === 'ADMIN'" (click)="onDelete(tender.tenderId)"><i class="fas fa-trash-alt fa-sm text-white-50"></i></button>
                         </td>
                     </tr>
                 </tbody>

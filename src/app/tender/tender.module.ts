@@ -6,6 +6,7 @@ import { TenderListComponent } from "./tender-list/tender-list.component";
 import { TenderDetailComponent } from "./tender-detail/tender-detail.component";
 import { TenderRoutingModule } from "./tender-routing.module";
 import { AuthGuard } from "../auth/auth-guard";
+import { AuthGuestGuard } from "../auth/auth-guest-guard";
 
 @NgModule({
   declarations: [TenderDetailComponent, TenderListComponent],
@@ -15,6 +16,6 @@ import { AuthGuard } from "../auth/auth-guard";
     RouterModule,
     TenderRoutingModule
   ],
-  providers: [AuthGuard]
+  providers: [AuthGuard,AuthGuestGuard]
 })
 export class TenderModule {}

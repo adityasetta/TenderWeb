@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
+import { AuthService } from "src/app/auth/auth.service";
 
 import { Tender } from "../tender.model";
 import { TenderService } from "../tender.service";
@@ -11,12 +12,14 @@ import { TenderService } from "../tender.service";
 })
 export class TenderListComponent implements OnInit, OnDestroy{
   tenders: Tender[] = [];
+  role: string;
   private tendersSub: Subscription;
 
-  constructor(public tendersService: TenderService){}
+  constructor(public tendersService: TenderService, private authService: AuthService){}
 
   ngOnInit(){
     this.tendersService.getTenders();
+    this.role = this.authService.getUserRole();
     console.log(this.tenders);
     this.tendersSub = this.tendersService.getTenderUpdateListener()
       .subscribe((tenderData:{tenders: Tender[]})=>{

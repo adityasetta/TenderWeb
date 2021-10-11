@@ -8,11 +8,11 @@ import { TenderInterceptor } from './tender/tender-interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from "./header/header.component";
-import { TenderModule } from './tender/tender.module';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AngularMaterialModule } from './angular-material.module';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './auth/login/login.component';
+import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,8 @@ import { LoginComponent } from './auth/login/login.component';
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:TenderInterceptor, multi:true},
-    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true}
   ],
   bootstrap: [
     AppComponent
