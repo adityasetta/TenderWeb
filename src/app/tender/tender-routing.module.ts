@@ -8,8 +8,17 @@ import { TenderListComponent } from "./tender-list/tender-list.component";
 const routes: Routes = [
   { path: "list", component: TenderListComponent, canActivate: [AuthGuard] },
   { path: "create", component: TenderDetailComponent, canActivate: [AuthGuard]  },
-  { path: "view/:tenderId/:readOnly", component: TenderDetailComponent, canActivate: [AuthGuard]  },
-  { path: "edit/:tenderId", component: TenderDetailComponent, canActivate: [AuthGuard]  }
+  { path: "view/:tenderId/:readOnly", component: TenderDetailComponent, canActivate: [AuthGuard] },
+  { path: "edit/:tenderId", component: TenderDetailComponent, canActivate: [AuthGuard]  },
+
+
+  // Tried to implement Child Routes, but parameter won't be passed, need more research on this
+  // { path: "detail", component: TenderDetailComponent, canActivate: [AuthGuard],
+  //     children:[
+  //       { path: ":tenderId", component: TenderDetailComponent},
+  //       { path: ":tenderId/:readOnly", component: TenderDetailComponent}
+  //     ]
+  // }
 ]
 
 @NgModule({

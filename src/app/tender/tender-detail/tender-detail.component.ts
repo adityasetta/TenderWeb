@@ -29,6 +29,7 @@ export class TenderDetailComponent implements OnInit {
     });
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      //console.log(paramMap);
       if(paramMap.has('tenderId')){
         if(paramMap.has('readOnly')){
           this.mode = "ReadOnly";
