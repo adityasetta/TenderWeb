@@ -1,0 +1,12 @@
+.btn-primary-outline {
+  margin: 1px;
+}
+
+.table-td-action{
+  text-align: center;
+}
+
+.table-tr-header{
+  background-color: #4E73DF;
+  color: white;
+}
