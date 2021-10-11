@@ -6,11 +6,10 @@ import { TenderDetailComponent } from './tender/tender-detail/tender-detail.comp
 import { TenderListComponent } from './tender/tender-list/tender-list.component';
 
 const routes: Routes = [
-  { path: "", component: TenderListComponent, canActivate: [AuthGuard] },
-  { path: "create", component: TenderDetailComponent, canActivate: [AuthGuard]  },
-  { path: "view/:tenderId/:readOnly", component: TenderDetailComponent, canActivate: [AuthGuard]  },
-  { path: "edit/:tenderId", component: TenderDetailComponent, canActivate: [AuthGuard]  },
-  { path: 'login', component: LoginComponent}
+  // lazy load tender components
+  { path: "tender", loadChildren: () => import('./tender/tender.module').then(m => m.TenderModule)},
+  { path: 'login', component: LoginComponent},
+  { path: '', redirectTo: 'tender/list', pathMatch: 'full'}
 ];
 
 @NgModule({

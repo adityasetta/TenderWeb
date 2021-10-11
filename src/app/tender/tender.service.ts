@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 import { map } from 'rxjs/operators';
+import { AuthService } from "../auth/auth.service";
 
 const BACKEND_URL = environment.apiUrl + "/tender/";
 
@@ -13,7 +14,7 @@ export class TenderService{
   private tenders: Tender[] = [];
   private tendersUpdated = new Subject<{tenders: Tender[]}>();
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private authService: AuthService) {}
 
   getTenders(){
     this.httpClient.get<{tenderId: number, contractNo: string, tenderName: string, releaseDate: string, closingDate: string}[]>(BACKEND_URL)
@@ -48,38 +49,44 @@ export class TenderService{
   }
 
   addTender(tenderName: string, contractNo: string, releaseDate: string, closingDate: string, description: string, creatorId: string){
+    const _creatorId = this.authService.getUserId();
+
     const post: Tender = { tenderId: 0,
       tenderName: tenderName,
       contractNo: contractNo,
       releaseDate: releaseDate,
       closingDate: closingDate,
       description: description,
-      creatorId: creatorId,
+      creatorId: _creatorId,
     };
 
-    this.httpClient.post(BACKEND_URL + creatorId, post)
+    this.httpClient.post(BACKEND_URL + _creatorId, post)
       .subscribe((responseData) => {
         console.log(responseData);
       });
   }
 
   editTender(tenderId: number, tenderName: string, contractNo: string, releaseDate: string, closingDate: string, description: string, creatorId: string){
+    const _creatorId = this.authService.getUserId();
+
     const post: Tender = { tenderId: tenderId,
       tenderName: tenderName,
       contractNo: contractNo,
       releaseDate: releaseDate,
       closingDate: closingDate,
       description: description,
-      creatorId: creatorId,
+      creatorId: _creatorId,
     };
 
-    this.httpClient.patch(BACKEND_URL + creatorId, post)
+    this.httpClient.patch(BACKEND_URL + _creatorId, post)
       .subscribe((responseData) => {
         console.log(responseData);
       });
   }
 
   deleteTender(tenderId: number){
-    return this.httpClient.delete(BACKEND_URL + "creatorId" + "/" + tenderId);
+    const _creatorId = this.authService.getUserId();
+
+    return this.httpClient.delete(BACKEND_URL + _creatorId + "/" + tenderId);
   }
 }
